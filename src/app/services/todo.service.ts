@@ -55,7 +55,7 @@ export class ToDoService {
     }
 
     getCryptoData(): Observable<CryptoData> {
-        return this.http.get<any>('https://api.coingecko.com/api/v3/coins/bitcoin').pipe(
+        return this.http.get<any>('https://api.coingecko.com/api/v3/coins/ethereum').pipe(
           map((data) => ({
             tokenImg: { small: data.image.small },
             tokenName: data.name,

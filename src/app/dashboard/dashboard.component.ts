@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { interval, map, Observable, tap } from 'rxjs';
+import { CryptoData } from '../interfaces/cryptoData.interface';
 import { ToDoService } from '../services/todo.service';
 
 @Component({
@@ -19,15 +20,7 @@ export class DashboardComponent implements OnInit {
 
   currentTime$!:Observable<string>;
 
-  tokenInfo = {
-    tokenName:'',
-    tokenImg:{ small:'' },
-    marketData: {
-      currentPrice: { usd:0 },
-      high_24h: { usd:0 },
-      low_24h: { usd:0 }
-    }
-  };
+  tokenInfo!: CryptoData;
 
 
   constructor(private todoService:ToDoService){};

@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { CryptoData } from '../interfaces/cryptoData.interface';
 
 @Component({
   selector: 'app-token-info',
@@ -7,14 +8,6 @@ import { Component, Input } from '@angular/core';
 })
 export class TokenInfoComponent {
 
-  @Input() tokenInfo!: {
-    tokenName:string,
-    tokenImg:{ small:string },
-    marketData: {
-      currentPrice: { usd:number },
-      high_24h: { usd:number },
-      low_24h: { usd:number }
-    }
-  }
+  @Input() tokenInfo!: CryptoData
 
 }
