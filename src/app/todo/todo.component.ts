@@ -25,10 +25,9 @@ export class TodoComponent {
     this.todo.isDeleted = true
   }
 
-  // addToPinnedTodo() adds a todo to an array to be displayed on the dashboard.
-  addToPinnedTodo() : void {
+  // 
+  handlePinnedTodo() : void {
     this.todoService.pinTodo(this.todo)
-    console.log(this.todoService.pinnedTodo)
   }
 
 }

@@ -1,6 +1,5 @@
 <div [ngStyle]="{ 'background-image': customedBgLoaded ? 'url(' + imageUrlObj.urls.raw + ')' :  ''  }" class="dashboard">
 
-    <!-- <button (click)="Debugging()">Debug</button> -->
     <svg id='loader' [ngStyle]="{ 'display' : customedBgLoaded ? 'none' : 'block'  }" viewBox="25 25 50 50">
         <circle r="20" cy="50" cx="50"></circle>
     </svg>
@@ -22,9 +21,14 @@
         [ngStyle]=" { 
             backgroundColor: pinnedTodo.type === 'Work' ?
             '#FE8B8B' : pinnedTodo.type === 'Study' ?
-            '#76C7EA' : '#67F4B7', display : pinnedTodo.isDeleted ? 'none' : 'flex' } "
+            '#76C7EA' : '#67F4B7', 
+            display : pinnedTodo.isDeleted || !pinnedTodo.isPinned  ? 'none' : 'flex' } "
     >
-            <i class="fa-solid fa-thumbtack"></i>
+            <i  
+                (click)="handlePinnedTodo()"
+                [ngStyle]="{ color : pinnedTodo.isPinned ? 'gold' : '#fff' }"
+                class="fa-solid fa-thumbtack"
+            ></i>
 
             <div class="todo-icons">
                 <i 

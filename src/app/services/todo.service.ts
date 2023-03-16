@@ -57,17 +57,13 @@ export class ToDoService {
 
     // pinTodo() adds a todo to the pinnedTodo[]
     pinTodo(todo:Todo) : void {
-        if(this.pinnedTodo.length > 0){
-            if(todo.id === this.pinnedTodo[0].id){
-                this.pinnedTodo = []
-            } else {
-                this.pinnedTodo = []
-                this.pinnedTodo.push(todo)
-            }
+        if(todo.isPinned){
+          todo.isPinned = false
+          this.pinnedTodo = []
         } else {
-            this.pinnedTodo.push(todo)
-        }
-      
+          todo.isPinned = true
+          this.pinnedTodo.push(todo)
+        }      
     }
 
     // FETCH REQUESTS - - - - - - - - - - - - - - - - - -

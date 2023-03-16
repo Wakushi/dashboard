@@ -71,12 +71,8 @@ export class DashboardComponent implements OnInit {
       this.todoService.pinnedTodo = []
   }
 
-  unPinTodo() : void {
-    this.todoService.pinnedTodo = []
-  }
-
-  Debugging() : void {
-    console.log(this.pinnedTodo)
+  handlePinnedTodo() : void {
+    this.todoService.pinTodo(this.pinnedTodo)
   }
 
 }

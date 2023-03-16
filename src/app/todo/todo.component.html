@@ -2,11 +2,27 @@
     class="todo" 
     [ngStyle]=" { backgroundColor: todo.type === 'Work' ? '#FE8B8B' : todo.type === 'Study' ? '#76C7EA' : '#67F4B7', display : todo.isDeleted ? 'none' : 'flex' } "
 >   
-    <i (click)="addToPinnedTodo()" class="fa-solid fa-thumbtack"></i>
+    <i 
+        [ngStyle]="{ color : todo.isPinned ? 'gold' : '#fff' }"
+        (click)="handlePinnedTodo()" 
+        class="fa-solid fa-thumbtack"
+    ></i>
+
     <div class="todo-icons">
-        <i (click)="todo.toggleIconDisplay()" class="fa-regular fa-calendar-xmark"></i>
-        <i [ngClass]="{ 'iconActive' : todo.areIconDisplayed }" (click)="deleteTodo()" class="fa-solid fa-check"></i>  
-        <i (click)="todo.toggleIconDisplay()" [ngClass]="{ 'iconActive' : todo.areIconDisplayed }" class="fa-solid fa-xmark"></i>
+        <i 
+            (click)="todo.toggleIconDisplay()" 
+            class="fa-regular fa-calendar-xmark"
+        ></i>
+        <i 
+            [ngClass]="{ 'iconActive' : todo.areIconDisplayed }" 
+            (click)="deleteTodo()" 
+            class="fa-solid fa-check"
+        ></i>  
+        <i 
+            [ngClass]="{ 'iconActive' : todo.areIconDisplayed }" 
+            (click)="todo.toggleIconDisplay()" 
+            class="fa-solid fa-xmark"
+        ></i>
     </div>
 
     <h2 class="todo-title">{{ todo.title }}</h2>
