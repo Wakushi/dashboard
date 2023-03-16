@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { interval, map, Observable, tap } from 'rxjs';
 import { CryptoData } from '../interfaces/cryptoData.interface';
+import { Todo } from '../models/todo.model';
 import { ToDoService } from '../services/todo.service';
 
 @Component({
@@ -15,6 +16,8 @@ export class DashboardComponent implements OnInit {
       raw:string
     }
   };
+
+  pinnedTodo!: Todo;
 
   customedBgLoaded:boolean = false;
 
@@ -56,15 +59,20 @@ export class DashboardComponent implements OnInit {
 
     this.todoService.getCryptoData().subscribe(
       (data => {
-        console.log(data)
-        this.tokenInfo = data
+        this.tokenInfo = data;
       })
     )
+
+    this.pinnedTodo = this.todoService.pinnedTodos[0] || null
 
   }
 
   getCurrentTime() : string {
     return new Date().toLocaleTimeString("en-us", {timeStyle: "short"})
+  }
+
+  Debugging() : void {
+    console.log(this.pinnedTodo)
   }
 
 }

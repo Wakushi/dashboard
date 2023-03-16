@@ -1,7 +1,17 @@
 export class Todo {
-        id!:number;
-        title!:string;
-        description!:string;
-        createdDate!: Date;
-        type!:string;
+        constructor(
+          public id: number,
+          public title: string,
+          public description: string,
+          public createdDate: Date,
+          public type: string,
+          public areIconDisplayed: boolean,
+          public isPinned:boolean
+        ) {}
+      
+        toggleIconDisplay(): void {
+          this.areIconDisplayed = !this.areIconDisplayed;
+        }
+
+        
 }

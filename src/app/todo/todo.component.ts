@@ -13,17 +13,17 @@ export class TodoComponent {
   @Input() todo!: Todo;
 
   isDeleted: boolean = false;
-  areIconDisplayed: boolean = false;
 
   constructor(private todoService:ToDoService){}
-
-  toggleIconDisplay() : void {
-    this.areIconDisplayed = !this.areIconDisplayed
-  }
 
   deleteTodo() : void {
     this.todoService.deleteTodo(this.todo.id)
     this.isDeleted = true
+  }
+
+  addToPinnedTodos() : void {
+    this.todoService.pinTodo(this.todo)
+    console.log(this.todoService.pinnedTodos)
   }
 
 }

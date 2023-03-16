@@ -16,6 +16,12 @@
         box-shadow: 2px 2px 8px rgb(107, 107, 107);
     }
 
+    .fa-thumbtack {
+        position: absolute;
+        top: 16px;
+        right: 45px;
+    }
+
     .todo-icons {
         display: flex;
         flex-direction: column;
@@ -26,6 +32,7 @@
         right: 15px;
     }
 
+    .fa-thumbtack,
     .fa-check,
     .fa-xmark,
     .fa-calendar-xmark {
