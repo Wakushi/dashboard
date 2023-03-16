@@ -1,8 +1,13 @@
 <div  
     class="todo" 
     [ngStyle]=" { backgroundColor: todo.type === 'Work' ? '#FE8B8B' : todo.type === 'Study' ? '#76C7EA' : '#67F4B7', display : this.isDeleted ? 'none' : 'flex' } "
->
-    <i (click)="deleteTodo()" class="fa-regular fa-calendar-xmark"></i>
+>   
+    <div class="todo-icons">
+        <i (click)="toggleIconDisplay()" class="fa-regular fa-calendar-xmark"></i>
+        <i [ngClass]="{ 'iconActive' : areIconDisplayed }" (click)="deleteTodo()" class="fa-solid fa-check"></i>  
+        <i (click)="toggleIconDisplay()" [ngClass]="{ 'iconActive' : areIconDisplayed }" class="fa-solid fa-xmark"></i>
+    </div>
+
     <h2 class="todo-title">{{ todo.title }}</h2>
     <span class="todo-date">
         <i class="fa-regular fa-calendar-check"></i>

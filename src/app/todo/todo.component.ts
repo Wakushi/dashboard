@@ -13,10 +13,15 @@ export class TodoComponent {
   @Input() todo!: Todo;
 
   isDeleted: boolean = false;
+  areIconDisplayed: boolean = false;
 
   constructor(private todoService:ToDoService){}
 
-  deleteTodo(){
+  toggleIconDisplay() : void {
+    this.areIconDisplayed = !this.areIconDisplayed
+  }
+
+  deleteTodo() : void {
     this.todoService.deleteTodo(this.todo.id)
     this.isDeleted = true
   }

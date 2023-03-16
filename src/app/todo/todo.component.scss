@@ -16,17 +16,49 @@
         box-shadow: 2px 2px 8px rgb(107, 107, 107);
     }
 
-    .fa-calendar-xmark {
+    .todo-icons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         position: absolute;
+        gap: 7px;
         top: 15px;
         right: 15px;
-        font-size: 1.2rem;
-        color: #fff;
+    }
+
+    .fa-check,
+    .fa-xmark,
+    .fa-calendar-xmark {
         cursor: pointer;
-        
+        color: #fff;
+        font-size: 1.1rem;
+    }
+    
+    .fa-check,
+    .fa-xmark {
+        display: none;
+    }
+
+    .iconActive {
+        display: block;
+        animation: fade-in-top 0.6s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    }
+
+    .fa-calendar-xmark {
+        top: 15px;
         &:hover {
             color: red;
         }
+    }
+
+    .fa-check:hover,
+    .fa-check:focus {
+        color: green;
+    }
+
+    .fa-xmark:hover,
+    .fa-xmark:focus {
+        color: red;
     }
 
     .todo-title,
@@ -55,3 +87,4 @@
     }
 
 }
+
