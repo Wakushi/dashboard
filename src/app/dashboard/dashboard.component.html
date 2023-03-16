@@ -1,1 +1,17 @@
-<p>dashboard works!</p>
+<div [ngStyle]="{ 'background-image': customedBgLoaded ? 'url(' + imageUrlObj.urls.raw + ')' :  ''  }" class="dashboard">
+
+    <!-- <button (click)="getCurrentTime()" >TEST</button> -->
+
+    <svg id='loader' [ngStyle]="{ 'display' : customedBgLoaded ? 'none' : 'block'  }" viewBox="25 25 50 50">
+        <circle r="20" cy="50" cx="50"></circle>
+    </svg>
+
+    <div class="top">
+        <div class="crypto-top">CRYPTO</div>
+        <div class="weather">WEATHER</div>
+    </div>
+    
+    <span class="time">{{ currentTime$ | async }}</span>
+    <p class="author"></p>
+
+</div>

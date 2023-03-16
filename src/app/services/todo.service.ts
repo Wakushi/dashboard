@@ -1,11 +1,15 @@
 import { Injectable } from "@angular/core";
 import { Todo } from "../models/todo.model";
+import { HttpClient } from "@angular/common/http";
+import { catchError, Observable } from "rxjs";
 
 @Injectable({
     providedIn:"root"
 })
 
 export class ToDoService {
+
+    constructor(private http:HttpClient ){}
 
     todos:Todo[] = [
         {
@@ -42,6 +46,14 @@ export class ToDoService {
 
     deleteTodo(id:number) : void {
         this.todos = this.todos.filter(todo => todo.id !== id)
+    }
+
+    getDashboardBgImg() : Observable<object> {
+        return this.http.get<object>("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature")
+    }
+
+    getCryptoData() : Observable<object> {
+        return this.http.get<object>("https://api.coingecko.com/api/v3/coins/bitcoin")
     }
 
 }
