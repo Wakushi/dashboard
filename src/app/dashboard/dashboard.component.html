@@ -1,6 +1,15 @@
-<div [ngStyle]="{ 'background-image': customedBgLoaded ? 'url(' + imageUrlObj.urls.raw + ')' :  ''  }" class="dashboard">
+<div 
+    [ngStyle]="{ 
+        'background-image': customedBgLoaded ?
+        'url(' + imageUrlObj.urls.raw + ')' :  ''  }" 
+    class="dashboard"
+>
 
-    <svg id='loader' [ngStyle]="{ 'display' : customedBgLoaded ? 'none' : 'block'  }" viewBox="25 25 50 50">
+    <svg 
+        id='loader' 
+        [ngStyle]="{ 'display' : customedBgLoaded ? 'none' : 'block'  }" 
+        viewBox="25 25 50 50"
+    >
         <circle r="20" cy="50" cx="50"></circle>
     </svg>
 
@@ -13,7 +22,7 @@
 
     <div class="bottom">
 
-        <p class="author">Michel Fguain</p>
+        <p *ngIf="customedBgLoaded" class="author"> {{ imageUrlObj.user.name }} </p>
 
     <div 
         class="todo pinned-todo" 

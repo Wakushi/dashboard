@@ -17,13 +17,16 @@
     width: 100%;
 }
 
+.time,
+.author {
+    text-shadow: 2px 1px 4px #111111c4;
+}
 
 .time {
     position: fixed;
     top: 40%;
     font-size: 3.5rem;
     font-weight: 900;
-    text-shadow: 2px 1px 4px #111111c4;
 }
 
 .author {

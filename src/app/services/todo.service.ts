@@ -55,15 +55,17 @@ export class ToDoService {
       this.todos = this.todos.filter(todo => todo.id !== id)
     }
 
-    // pinTodo() adds a todo to the pinnedTodo[]
+    // pinTodo() handles the adding and removal of todos as pinnedTodo
     pinTodo(todo:Todo) : void {
         if(todo.isPinned){
           todo.isPinned = false
           this.pinnedTodo = []
         } else {
+          this.todos.forEach(todo => todo.isPinned = false)
+          this.pinnedTodo = []
           todo.isPinned = true
           this.pinnedTodo.push(todo)
-        }      
+        }  
     }
 
     // FETCH REQUESTS - - - - - - - - - - - - - - - - - -

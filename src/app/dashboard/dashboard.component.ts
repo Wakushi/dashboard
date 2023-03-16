@@ -19,6 +19,9 @@ export class DashboardComponent implements OnInit {
   imageUrlObj!: {
     urls:{
       raw:string
+    },
+    user:{
+      name:string
     }
   };
 
@@ -29,18 +32,20 @@ export class DashboardComponent implements OnInit {
     // This handles the display of the dashboard's background image.
     this.todoService.getDashboardBgImg().subscribe(
       (data:any) => {
-        if(data.errors) {
+        if(data.errors) { // sets a default image in case the API errors.
           this.imageUrlObj = { 
             urls:{ 
               raw:"https://images.unsplash.com/photo-1446034295857-c39f8844fad4?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwxNDI0NzB8MHwxfHJhbmRvbXx8fHx8fHx8fDE2Nzg5NzMzNzc&ixlib=rb-4.0.3&q=80"
+            },
+            user:{
+              name:'Mike H.'
             } 
           }
           this.customedBgLoaded = true
         } else {
           this.imageUrlObj = data
-          setTimeout(()=> {
-            this.customedBgLoaded = true
-          }, 300)
+          this.customedBgLoaded = true
+          
         }  
       }
     )

@@ -58,6 +58,7 @@ textarea {
       position: absolute;
       top: 16px;
       right: 45px;
+      
   }
 
   .todo-icons {
@@ -110,10 +111,12 @@ textarea {
     width: 80%;
   }
 
+  .fa-thumbtack,
+  .todo-desc,
   .todo-title,
   .todo-date {
       color: rgb(255, 255, 255);
-      text-shadow: 1px 1px 5px #3f3f3f;
+      text-shadow: 1px 1px 3px #464545ce;
   }
 
   .todo-date {
@@ -128,9 +131,7 @@ textarea {
 
   .todo-desc {
       margin-bottom: 3em;
-      width: 90%;
-      color: #111;
-      font-weight: 500;
+      font-weight: 600;
       font-family: 'Karla', sans-serif;
       font-size: 1.3rem;
   }
