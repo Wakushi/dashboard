@@ -5,55 +5,77 @@ import { Observable } from "rxjs";
 import { CryptoData } from "../interfaces/cryptoData.interface";
 import { map } from "rxjs";
 
+// The decorator @Injectable allows this class to be used as a service.
+// providedIn:'root' means that its data will be accessible by all our components.
 @Injectable({
     providedIn:"root"
 })
 
 export class ToDoService {
 
+    // We import the httpClient which unlocks the get() methods to fetch data from APIs.
     constructor(private http:HttpClient){}
 
-    todos:Todo[] = [
-        {
-            id:1,
-            title:"Learn",
-            description:"Read : 'Learn Angular in 7 days'",
-            createdDate:new Date(),
-            type:"Study"
-            
-        },
-        {
-            id:2,
-            title:"Cooking",
-            description:"Buy vegetables for tomorrow's soup",
-            createdDate:new Date(),
-            type:"Other"
-        },
-        {
-            id:3,
-            title:"Call Simon",
-            description:"06.XX.XX.XX.XX",
-            createdDate:new Date(),
-            type:"Work"
-        }
+    // todos simulates the data from all the user's Todos.
+    todos: Todo[] = [
+        new Todo(1, "Learn", "Read : 'Learn Angular in 7 days'", new Date(), "Study", false, false, false),
+        new Todo(2, "Cooking", "Buy vegetables for tomorrow's soup", new Date(), "Other", false, false, false),
+        new Todo(3, "Call Simon", "06.XX.XX.XX.XX", new Date(), "Work", false, false, false)
+      ];
+
+    // pinnedTodo holds the Todo that the user pinned to his dashboard.  
+    pinnedTodo:Todo[] = [
+    
     ]
 
-    addTodo(todo:Todo) : void {
-        this.todos.unshift({
-            ...todo,
-            createdDate: new Date(),
-            id: this.todos.length + 1
-        })
-    }
-
+    // addTodo() generates a new Todo using the user inputs from NewTodoFormComponent and adds it to the todos[].
+    // [No back-end] : This would use a POST request to send the new Todo to a server.
+    addTodo(todo: Todo): void {
+        const newTodo = new Todo(
+          this.todos.length + 1,
+          todo.title,
+          todo.description,
+          new Date(),
+          todo.type,
+          false,
+          false,
+          false
+        );
+        this.todos.unshift(newTodo);
+      }
+    
+    // deleteTodo() removes a todo from the todos[]
+    // [No back-end] : This would use a DELETE request to delete the new Todo to a server (using its id)
     deleteTodo(id:number) : void {
-        this.todos = this.todos.filter(todo => todo.id !== id)
+      this.todos.forEach(todo => {
+        if(todo.id === id){
+          todo.isDeleted = true
+        }
+      })
+      this.todos = this.todos.filter(todo => todo.id !== id)
     }
 
+    // pinTodo() handles the adding and removal of todos as pinnedTodo
+    pinTodo(todo:Todo) : void {
+        if(todo.isPinned){
+          todo.isPinned = false
+          this.pinnedTodo = []
+        } else {
+          this.todos.forEach(todo => todo.isPinned = false)
+          this.pinnedTodo = []
+          todo.isPinned = true
+          this.pinnedTodo.push(todo)
+        }  
+    }
+
+    // FETCH REQUESTS - - - - - - - - - - - - - - - - - -
+
+    // getDashboardImg() uses the unsplash API to get a random picture for the dashboard's background image.
     getDashboardBgImg() : Observable<object> {
         return this.http.get<object>("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature")
     }
 
+    // getCryptoData() uses the coingecko API to get data (price, icon, 24h-high etc..) about a token.
     getCryptoData(): Observable<CryptoData> {
         return this.http.get<any>('https://api.coingecko.com/api/v3/coins/ethereum').pipe(
           map((data) => ({

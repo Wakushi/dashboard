@@ -1,3 +1,5 @@
+
+// This interface is a template for the data received from the getCryptoData()
 export interface CryptoData {
     tokenImg: { small:string };
     tokenName: string;

@@ -1,15 +1,69 @@
-<div [ngStyle]="{ 'background-image': customedBgLoaded ? 'url(' + imageUrlObj.urls.raw + ')' :  ''  }" class="dashboard">
+<div 
+    [ngStyle]="{ 
+        'background-image': customedBgLoaded ?
+        'url(' + imageUrlObj.urls.raw + ')' :  ''  }" 
+    class="dashboard"
+>
 
-    <svg id='loader' [ngStyle]="{ 'display' : customedBgLoaded ? 'none' : 'block'  }" viewBox="25 25 50 50">
+    <svg 
+        id='loader' 
+        [ngStyle]="{ 'display' : customedBgLoaded ? 'none' : 'block'  }" 
+        viewBox="25 25 50 50"
+    >
         <circle r="20" cy="50" cx="50"></circle>
     </svg>
 
     <div class="top">
-        <app-token-info [tokenInfo]="tokenInfo"></app-token-info>
+        <app-token-info *ngIf="tokenInfo" [tokenInfo]="tokenInfo"></app-token-info>
         <div class="weather">WEATHER</div>
     </div>
     
     <span class="time">{{ currentTime$ | async }}</span>
-    <p class="author"></p>
+
+    <div class="bottom">
+
+        <p *ngIf="customedBgLoaded" class="author"> {{ imageUrlObj.user.name }} </p>
+
+    <div 
+        class="todo pinned-todo" 
+        *ngIf="pinnedTodo"
+        [ngStyle]=" { 
+            backgroundColor: pinnedTodo.type === 'Work' ?
+            '#FE8B8B' : pinnedTodo.type === 'Study' ?
+            '#76C7EA' : '#67F4B7', 
+            display : pinnedTodo.isDeleted || !pinnedTodo.isPinned  ? 'none' : 'flex' } "
+    >
+            <i  
+                (click)="handlePinnedTodo()"
+                [ngStyle]="{ color : pinnedTodo.isPinned ? 'gold' : '#fff' }"
+                class="fa-solid fa-thumbtack"
+            ></i>
+
+            <div class="todo-icons">
+                <i 
+                    (click)="pinnedTodo.toggleIconDisplay()" 
+                    class="fa-regular fa-calendar-xmark"
+                ></i>
+                <i 
+                    [ngClass]="{ 'iconActive' : pinnedTodo.areIconDisplayed }" 
+                    (click)="deletePinnedTodo()" 
+                    class="fa-solid fa-check"></i>  
+                <i 
+                    [ngClass]="{ 'iconActive' : pinnedTodo.areIconDisplayed }" 
+                    (click)="pinnedTodo.toggleIconDisplay()" 
+                    class="fa-solid fa-xmark"></i>
+            </div>
+
+            <h2 class="todo-title">{{ pinnedTodo.title }}</h2>
+
+            <span class="todo-date">
+                <i class="fa-regular fa-calendar-check"></i>
+                {{ pinnedTodo.createdDate | date:'mediumDate' }}
+            </span>
+            
+            <p class="todo-desc"> {{ pinnedTodo.description }}</p>
+        </div>
+
+    </div>
 
 </div>

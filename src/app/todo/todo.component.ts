@@ -10,20 +10,24 @@ import { ToDoService } from '../services/todo.service';
 
 export class TodoComponent {
 
-  @Input() todo!: Todo;
+  // We import the Todo Class and its methods to easily build Todo objects.
+  @Input() todo!: Todo; 
 
-  isDeleted: boolean = false;
-  areIconDisplayed: boolean = false;
+  // isDeleted is used to remove a Todo from the DOM when deleteTodo() is called.
+  // isDeleted: boolean = false;
 
+  // We use the constructor to import our TodoService. 
   constructor(private todoService:ToDoService){}
 
-  toggleIconDisplay() : void {
-    this.areIconDisplayed = !this.areIconDisplayed
-  }
-
+  // deleteTodo() removes the selected Todo from data (todo.service.ts).
   deleteTodo() : void {
     this.todoService.deleteTodo(this.todo.id)
-    this.isDeleted = true
+    this.todo.isDeleted = true
+  }
+
+  // 
+  handlePinnedTodo() : void {
+    this.todoService.pinTodo(this.todo)
   }
 
 }

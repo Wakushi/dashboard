@@ -3,24 +3,42 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    padding: 5em 1em;
+    padding: 5em 1em 1em 1em;
     height: 100%;
     background-size: cover;
     transition: 1s;
     color: #fff;
 }
 
+.bottom,
 .top {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     width: 100%;
 }
 
+.time,
+.author {
+    text-shadow: 2px 1px 4px #111111c4;
+}
+
 .time {
+    position: fixed;
+    top: 40%;
     font-size: 3.5rem;
     font-weight: 900;
-    text-shadow: 2px 1px 4px #111111b6;
+}
+
+.author {
+    margin-right: auto;
+    font-size: 0.89rem;
+    align-self: flex-end;
+}
+
+.pinned-todo {
+    max-width: 250px;
+    box-shadow: 1px 1px 5px #111;
+    scale: 0.8;
 }
 
 // LOADER DISPLAY AND ANIMATION
