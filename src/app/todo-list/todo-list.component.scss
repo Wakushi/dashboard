@@ -1,0 +1,39 @@
+.todo-container,
+.empty-todo {
+    display: flex;
+    justify-content: center;
+}
+
+.todo-container {
+    flex-wrap: wrap;
+    padding-top: 5em;
+} 
+
+.empty-todo {
+    flex-direction: column;
+    align-items: center;
+    padding: 0.8em 1.5em;
+    box-shadow: 2px 2px 8px rgb(150, 150, 150);
+    border-radius: 5px;
+    margin: 1em;
+    flex: 200px 1;
+    max-width: 250px;
+    min-height: 200px;
+    transition: 1s;
+    gap: 1rem;
+    cursor: pointer;
+    opacity: 0.3;
+
+    &:hover {
+        transform: translateY(-3%);
+        opacity: 1;
+    }
+
+    span,
+    i {
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+
+}
+

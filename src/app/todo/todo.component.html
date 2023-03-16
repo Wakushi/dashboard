@@ -1,0 +1,12 @@
+<div  
+    class="todo" 
+    [ngStyle]=" { backgroundColor: todo.type === 'Work' ? '#FE8B8B' : todo.type === 'Study' ? '#76C7EA' : '#67F4B7', display : this.isDeleted ? 'none' : 'flex' } "
+>
+    <i (click)="deleteTodo()" class="fa-regular fa-calendar-xmark"></i>
+    <h2 class="todo-title">{{ todo.title }}</h2>
+    <span class="todo-date">
+        <i class="fa-regular fa-calendar-check"></i>
+        {{ todo.createdDate | date:'mediumDate' }}
+    </span>
+    <p class="todo-desc"> {{ todo.description }}</p>
+</div>

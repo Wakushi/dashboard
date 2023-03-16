@@ -1,0 +1,13 @@
+<header>
+    <div (click)="onClickNavigate($event)" class="header-logo">
+        <i class="fa-regular fa-calendar-check"></i>
+        <h1>Todo</h1>
+    </div>
+    <nav>
+        <ul>
+            <li><a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Home</a></li>
+            <li><a routerLink="todolist" routerLinkActive="active">Todo</a></li>
+            <li>About</li>
+        </ul>
+    </nav>
+</header>

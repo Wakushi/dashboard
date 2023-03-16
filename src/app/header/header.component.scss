@@ -1,0 +1,62 @@
+header {
+    z-index: 999;
+    background-color: #fff;
+    width: 100%;
+    position: fixed;
+    top: 0px;
+    box-shadow: 2px 2px 8px rgb(150, 150, 150);
+    padding: 0.3em 1em;
+
+    i, h1 {
+        cursor: pointer;
+        font-size: 5vw;
+    }
+}
+
+header, nav ul, .header-logo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-logo {
+    gap: 1vw;
+}
+
+nav ul {
+    list-style: none;
+
+    li {
+        margin: 0 0.2em;
+        cursor: pointer;
+        font-weight: 500;
+        font-size: 4vw;
+    }
+
+    li:hover,
+    li:focus {
+        text-decoration: underline;
+    }
+}
+
+.active {
+    font-weight: 700;
+    font-size: 4.2vw;
+}
+
+@media screen and (min-width:510px) {
+    header {
+        i, h1 {
+            font-size: 1.5rem;
+        }
+
+        nav ul li {
+            font-size: 1.2rem;
+        }
+    }
+
+    .active {
+        font-weight: 700;
+        font-size: 1.3rem;
+    }
+}

@@ -1,0 +1,9 @@
+<div class="todo-container">
+    <div (click)="openAddTodo()" class="empty-todo">
+        <span>Add a todo</span>
+        <i class="fa-regular fa-square-plus"></i>
+    </div>
+    
+    <app-todo *ngFor="let todo of todoList" [todo]="todo"></app-todo>
+    
+</div>
