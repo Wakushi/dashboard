@@ -1,3 +1,4 @@
+// Our template class to easily build Todo objects.
 export class Todo {
         constructor(
           public id: number,
@@ -6,9 +7,11 @@ export class Todo {
           public createdDate: Date,
           public type: string,
           public areIconDisplayed: boolean,
-          public isPinned:boolean
+          public isPinned:boolean,
+          public isDeleted:boolean
         ) {}
       
+        // toggles the display of the delete confirmation icons of a Todo.
         toggleIconDisplay(): void {
           this.areIconDisplayed = !this.areIconDisplayed;
         }

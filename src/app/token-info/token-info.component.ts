@@ -8,6 +8,9 @@ import { CryptoData } from '../interfaces/cryptoData.interface';
 })
 export class TokenInfoComponent {
 
+  // This @Input decorator is used to bring our CryptoData class 
+  // to help our template to display the required information. 
+  
   @Input() tokenInfo!: CryptoData
 
 }

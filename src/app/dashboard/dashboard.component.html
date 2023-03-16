@@ -1,6 +1,6 @@
 <div [ngStyle]="{ 'background-image': customedBgLoaded ? 'url(' + imageUrlObj.urls.raw + ')' :  ''  }" class="dashboard">
 
-    <button (click)="Debugging()">Debug</button>
+    <!-- <button (click)="Debugging()">Debug</button> -->
     <svg id='loader' [ngStyle]="{ 'display' : customedBgLoaded ? 'none' : 'block'  }" viewBox="25 25 50 50">
         <circle r="20" cy="50" cx="50"></circle>
     </svg>
@@ -16,21 +16,40 @@
 
         <p class="author">Michel Fguain</p>
 
-        <!-- <div class="pinned-todo">
-            <i (click)="addToPinnedTodos()" class="fa-solid fa-thumbtack"></i>
+    <div 
+        class="todo pinned-todo" 
+        *ngIf="pinnedTodo"
+        [ngStyle]=" { 
+            backgroundColor: pinnedTodo.type === 'Work' ?
+            '#FE8B8B' : pinnedTodo.type === 'Study' ?
+            '#76C7EA' : '#67F4B7', display : pinnedTodo.isDeleted ? 'none' : 'flex' } "
+    >
+            <i class="fa-solid fa-thumbtack"></i>
+
             <div class="todo-icons">
-                <i (click)="toggleIconDisplay()" class="fa-regular fa-calendar-xmark"></i>
-                <i [ngClass]="{ 'iconActive' : areIconDisplayed }" (click)="deleteTodo()" class="fa-solid fa-check"></i>  
-                <i (click)="toggleIconDisplay()" [ngClass]="{ 'iconActive' : areIconDisplayed }" class="fa-solid fa-xmark"></i>
+                <i 
+                    (click)="pinnedTodo.toggleIconDisplay()" 
+                    class="fa-regular fa-calendar-xmark"
+                ></i>
+                <i 
+                    [ngClass]="{ 'iconActive' : pinnedTodo.areIconDisplayed }" 
+                    (click)="deletePinnedTodo()" 
+                    class="fa-solid fa-check"></i>  
+                <i 
+                    [ngClass]="{ 'iconActive' : pinnedTodo.areIconDisplayed }" 
+                    (click)="pinnedTodo.toggleIconDisplay()" 
+                    class="fa-solid fa-xmark"></i>
             </div>
 
             <h2 class="todo-title">{{ pinnedTodo.title }}</h2>
+
             <span class="todo-date">
                 <i class="fa-regular fa-calendar-check"></i>
                 {{ pinnedTodo.createdDate | date:'mediumDate' }}
             </span>
+            
             <p class="todo-desc"> {{ pinnedTodo.description }}</p>
-        </div> -->
+        </div>
 
     </div>
 

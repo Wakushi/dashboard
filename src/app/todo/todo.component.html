@@ -1,8 +1,8 @@
 <div  
     class="todo" 
-    [ngStyle]=" { backgroundColor: todo.type === 'Work' ? '#FE8B8B' : todo.type === 'Study' ? '#76C7EA' : '#67F4B7', display : this.isDeleted ? 'none' : 'flex' } "
+    [ngStyle]=" { backgroundColor: todo.type === 'Work' ? '#FE8B8B' : todo.type === 'Study' ? '#76C7EA' : '#67F4B7', display : todo.isDeleted ? 'none' : 'flex' } "
 >   
-    <i (click)="addToPinnedTodos()" class="fa-solid fa-thumbtack"></i>
+    <i (click)="addToPinnedTodo()" class="fa-solid fa-thumbtack"></i>
     <div class="todo-icons">
         <i (click)="todo.toggleIconDisplay()" class="fa-regular fa-calendar-xmark"></i>
         <i [ngClass]="{ 'iconActive' : todo.areIconDisplayed }" (click)="deleteTodo()" class="fa-solid fa-check"></i>  

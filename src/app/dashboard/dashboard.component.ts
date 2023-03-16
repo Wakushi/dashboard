@@ -11,29 +11,23 @@ import { ToDoService } from '../services/todo.service';
 })
 export class DashboardComponent implements OnInit {
 
+  pinnedTodo!: Todo;
+  customedBgLoaded:boolean = false;
+  currentTime$!:Observable<string>;
+  tokenInfo!: CryptoData;
+
   imageUrlObj!: {
     urls:{
       raw:string
     }
   };
 
-  pinnedTodo!: Todo;
-
-  customedBgLoaded:boolean = false;
-
-  currentTime$!:Observable<string>;
-
-  tokenInfo!: CryptoData;
-
-
   constructor(private todoService:ToDoService){};
 
   ngOnInit(): void {
 
+    // This handles the display of the dashboard's background image.
     this.todoService.getDashboardBgImg().subscribe(
-
-      // This handles the display of the dashboard's background image.
-
       (data:any) => {
         if(data.errors) {
           this.imageUrlObj = { 
@@ -51,6 +45,7 @@ export class DashboardComponent implements OnInit {
       }
     )
 
+
     this.currentTime$ = interval(1000).pipe(
       map(() => {
         return this.getCurrentTime();
@@ -63,12 +58,21 @@ export class DashboardComponent implements OnInit {
       })
     )
 
-    this.pinnedTodo = this.todoService.pinnedTodos[0] || null
+    this.pinnedTodo = this.todoService.pinnedTodo[0] || null
 
   }
 
   getCurrentTime() : string {
     return new Date().toLocaleTimeString("en-us", {timeStyle: "short"})
+  }
+
+  deletePinnedTodo() : void {
+      this.todoService.deleteTodo(this.pinnedTodo.id)
+      this.todoService.pinnedTodo = []
+  }
+
+  unPinTodo() : void {
+    this.todoService.pinnedTodo = []
   }
 
   Debugging() : void {
