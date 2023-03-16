@@ -1,0 +1,26 @@
+.token {
+    span,
+    p {
+        font-weight: 600;
+        text-shadow: 2px 1px 8px #111111b6;
+    }
+}
+
+.token-top {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transform: translateX(-7%);
+}
+
+.token-logo {
+    width: 30px;
+}
+
+.fa-arrows-up-to-line {
+    color: green;
+}
+
+.fa-arrows-down-to-line {
+    color: red;
+}

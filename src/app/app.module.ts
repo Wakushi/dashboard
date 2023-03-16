@@ -10,6 +10,7 @@ import { TodoListComponent } from './todo-list/todo-list.component';
 import { NewTodoFormComponent } from './new-todo-form/new-todo-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { TokenInfoComponent } from './token-info/token-info.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
     DashboardComponent,
     TodoComponent,
     TodoListComponent,
-    NewTodoFormComponent
+    NewTodoFormComponent,
+    TokenInfoComponent
   ],
   imports: [
     BrowserModule,

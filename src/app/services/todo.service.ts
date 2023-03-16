@@ -1,7 +1,9 @@
 import { Injectable } from "@angular/core";
 import { Todo } from "../models/todo.model";
 import { HttpClient } from "@angular/common/http";
-import { catchError, Observable } from "rxjs";
+import { Observable } from "rxjs";
+import { CryptoData } from "../interfaces/cryptoData.interface";
+import { map } from "rxjs";
 
 @Injectable({
     providedIn:"root"
@@ -9,7 +11,7 @@ import { catchError, Observable } from "rxjs";
 
 export class ToDoService {
 
-    constructor(private http:HttpClient ){}
+    constructor(private http:HttpClient){}
 
     todos:Todo[] = [
         {
@@ -52,8 +54,18 @@ export class ToDoService {
         return this.http.get<object>("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature")
     }
 
-    getCryptoData() : Observable<object> {
-        return this.http.get<object>("https://api.coingecko.com/api/v3/coins/bitcoin")
-    }
+    getCryptoData(): Observable<CryptoData> {
+        return this.http.get<any>('https://api.coingecko.com/api/v3/coins/bitcoin').pipe(
+          map((data) => ({
+            tokenImg: { small: data.image.small },
+            tokenName: data.name,
+            marketData: {
+              currentPrice: { usd: data.market_data.current_price.usd },
+              high_24h: { usd: data.market_data.high_24h.usd },
+              low_24h: { usd: data.market_data.low_24h.usd },
+            },
+          })),
+        )
+      }
 
 }

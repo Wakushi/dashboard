@@ -1,0 +1,11 @@
+<div class="token">
+    <div class="token-top"> 
+        <img class="token-logo" [src]="tokenInfo.tokenImg.small" [alt]="tokenInfo.tokenName"  />
+        <span> {{ tokenInfo.tokenName }} </span>
+    </div>
+    <p>🎯: {{ tokenInfo.marketData.currentPrice.usd }} </p>
+    <p><i class="fa-solid fa-arrows-up-to-line"></i> : {{ tokenInfo.marketData.high_24h.usd }} </p>
+    <p><i class="fa-solid fa-arrows-down-to-line"></i> : {{ tokenInfo.marketData.low_24h.usd }} </p>
+</div>
+
+

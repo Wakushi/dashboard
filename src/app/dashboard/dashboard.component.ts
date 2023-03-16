@@ -14,8 +14,20 @@ export class DashboardComponent implements OnInit {
       raw:string
     }
   };
+
   customedBgLoaded:boolean = false;
+
   currentTime$!:Observable<string>;
+
+  tokenInfo = {
+    tokenName:'',
+    tokenImg:{ small:'' },
+    marketData: {
+      currentPrice: { usd:0 },
+      high_24h: { usd:0 },
+      low_24h: { usd:0 }
+    }
+  };
 
 
   constructor(private todoService:ToDoService){};
@@ -48,7 +60,14 @@ export class DashboardComponent implements OnInit {
         return this.getCurrentTime();
       }),
     )
-      
+
+    this.todoService.getCryptoData().subscribe(
+      (data => {
+        console.log(data)
+        this.tokenInfo = data
+      })
+    )
+
   }
 
   getCurrentTime() : string {
