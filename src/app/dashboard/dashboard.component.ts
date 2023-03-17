@@ -25,6 +25,12 @@ export class DashboardComponent implements OnInit {
     }
   };
 
+  weatherObj = {
+    city:'',
+    temperature:null,
+    iconUrl:''
+  }
+
   constructor(private todoService:ToDoService){};
 
   ngOnInit(): void {
@@ -61,6 +67,10 @@ export class DashboardComponent implements OnInit {
       (data => {
         this.tokenInfo = data;
       })
+    )
+
+    this.todoService.getWeather().subscribe(
+      ((data:any) => this.weatherObj = data)
     )
 
     this.pinnedTodo = this.todoService.pinnedTodo[0] || null

@@ -17,6 +17,8 @@
     width: 100%;
 }
 
+.weather-city,
+.weather-temp,
 .time,
 .author {
     text-shadow: 2px 1px 4px #111111c4;
@@ -36,9 +38,37 @@
 }
 
 .pinned-todo {
+    margin-left: auto;
     max-width: 250px;
     box-shadow: 1px 1px 5px #111;
     scale: 0.8;
+}
+
+.weather {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-self: flex-start;
+    margin-top: -10px;
+}
+
+.weather > img {
+    width: 70px;
+}
+
+.weather-city {
+    width: 100%;
+    text-align: right;
+    margin: 0;
+    margin-top: -10px;
+    font-size: 0.9rem;
+}
+
+.weather-temp {
+    margin: 0;
+    font-size: 1.7rem;
+    margin-left: -10px;
 }
 
 // LOADER DISPLAY AND ANIMATION

@@ -1,7 +1,7 @@
-import { Injectable } from "@angular/core";
+import { Injectable, NgZone } from "@angular/core";
 import { Todo } from "../models/todo.model";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, switchMap } from "rxjs";
 import { CryptoData } from "../interfaces/cryptoData.interface";
 import { map } from "rxjs";
 
@@ -14,7 +14,12 @@ import { map } from "rxjs";
 export class ToDoService {
 
     // We import the httpClient which unlocks the get() methods to fetch data from APIs.
-    constructor(private http:HttpClient){}
+    constructor(private http:HttpClient, private ngZone:NgZone){}
+
+    userPosition = {
+        lat:0,
+        long:0
+    };
 
     // todos simulates the data from all the user's Todos.
     todos: Todo[] = [
@@ -88,6 +93,33 @@ export class ToDoService {
             },
           })),
         )
-      }
+    }
+
+    // getWeather() uses the OWM API to gather data relative to the user's pos.
+    getWeather(): Observable<object> {
+        return new Observable(observer => {
+          navigator.geolocation.getCurrentPosition(position => {
+            this.ngZone.run(() => {
+              this.userPosition.lat = position.coords.latitude;
+              this.userPosition.long = position.coords.longitude;
+              observer.next();
+              observer.complete();
+            });
+          });
+        }).pipe(
+          switchMap(() =>
+            this.http.get<object>(
+              `https://apis.scrimba.com/openweathermap/data/2.5/weather?lat=${this.userPosition.lat}&lon=${this.userPosition.long}&units=metric`
+            )
+          ),
+          map((data: any) => ({
+            iconUrl: `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`,
+            temperature: Math.round(data.main.temp),
+            city: data.name,
+          })),
+        );
+    }
+      
+   
 
 }

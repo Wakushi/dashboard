@@ -15,7 +15,13 @@
 
     <div class="top">
         <app-token-info *ngIf="tokenInfo" [tokenInfo]="tokenInfo"></app-token-info>
-        <div class="weather">WEATHER</div>
+
+        <div class="weather" *ngIf="weatherObj">
+            <img [src]="weatherObj.iconUrl" [alt]="weatherObj.city" />
+            <span class="weather-temp"> {{ weatherObj.temperature }} </span>
+            <span class="weather-city"> {{ weatherObj.city }} </span>
+        </div>
+
     </div>
     
     <span class="time">{{ currentTime$ | async }}</span>
@@ -24,15 +30,15 @@
 
         <p *ngIf="customedBgLoaded" class="author"> {{ imageUrlObj.user.name }} </p>
 
-    <div 
-        class="todo pinned-todo" 
-        *ngIf="pinnedTodo"
-        [ngStyle]=" { 
-            backgroundColor: pinnedTodo.type === 'Work' ?
-            '#FE8B8B' : pinnedTodo.type === 'Study' ?
-            '#76C7EA' : '#67F4B7', 
-            display : pinnedTodo.isDeleted || !pinnedTodo.isPinned  ? 'none' : 'flex' } "
-    >
+        <div 
+            class="todo pinned-todo" 
+            *ngIf="pinnedTodo"
+            [ngStyle]=" { 
+                backgroundColor: pinnedTodo.type === 'Work' ?
+                '#FE8B8B' : pinnedTodo.type === 'Study' ?
+                '#76C7EA' : '#67F4B7', 
+                display : pinnedTodo.isDeleted || !pinnedTodo.isPinned  ? 'none' : 'flex' } "
+        >
             <i  
                 (click)="handlePinnedTodo()"
                 [ngStyle]="{ color : pinnedTodo.isPinned ? 'gold' : '#fff' }"
