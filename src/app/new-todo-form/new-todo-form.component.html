@@ -24,7 +24,10 @@
         *ngIf="todoPreview$ | async as todo"
         [id]="todo.id" 
         class="todo-preview" 
-        [ngStyle]=" { backgroundColor: todo.type === 'Work' ? '#FE8B8B' : todo.type === 'Study' ? '#76C7EA' : '#67F4B7' } "
+        [ngStyle]=" { 
+            backgroundColor: todo.type === 'Work' ? 
+                            '#BF211E' : todo.type === 'Study' ? 
+                            '#2EBFA5' : '#FED766' } "
     >
         <h2 class="todo-title">{{ todo.title }}</h2>
         <span class="todo-date">

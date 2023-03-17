@@ -1,6 +1,10 @@
 <div  
     class="todo" 
-    [ngStyle]=" { backgroundColor: todo.type === 'Work' ? '#BF211E' : todo.type === 'Study' ? '#2EBFA5' : '#FED766', display : todo.isDeleted ? 'none' : 'flex' } "
+    [ngStyle]=" { 
+        backgroundColor: todo.type === 'Work' ?
+        '#BF211E' : todo.type === 'Study' ? 
+        '#2EBFA5' : '#FED766', 
+        display : todo.isDeleted ? 'none' : 'flex' } "
 >   
     <i 
         [ngStyle]="{ color : todo.isPinned ? 'gold' : '#fff' }"
