@@ -16,11 +16,6 @@ export class ToDoService {
     // We import the httpClient which unlocks the get() methods to fetch data from APIs.
     constructor(private http:HttpClient, private ngZone:NgZone){}
 
-    userPosition = {
-        lat:0,
-        long:0
-    };
-
     // todos simulates the data from all the user's Todos.
     todos: Todo[] = [
         new Todo(1, "Learn", "Read : 'Learn Angular in 7 days'", new Date(), "Study", false, false, false),
@@ -94,6 +89,13 @@ export class ToDoService {
           })),
         )
     }
+
+    // userPosition serves as a template to receive the user position values 
+    // from getWeather() so they can be used to call the openweathermap API.   
+    userPosition = {
+      lat:0,
+      long:0
+    };
 
     // getWeather() uses the OWM API to gather data relative to the user's pos.
     getWeather(): Observable<object> {
