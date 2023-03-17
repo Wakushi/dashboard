@@ -14,6 +14,12 @@
         right: 20px;
         font-size: 1.5rem;
         color: #fff;
+        cursor: pointer;
+
+        &:hover,
+        &:focus {
+            color: #3f3f3f;
+        }
     }
 
     .todo-form-title {
