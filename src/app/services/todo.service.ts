@@ -1,7 +1,7 @@
 import { Injectable, NgZone } from "@angular/core";
 import { Todo } from "../models/todo.model";
 import { HttpClient } from "@angular/common/http";
-import { Observable, switchMap } from "rxjs";
+import { BehaviorSubject, Observable, switchMap, tap } from "rxjs";
 import { CryptoData } from "../interfaces/cryptoData.interface";
 import { map } from "rxjs";
 import { WeatherData } from "../models/weatherData.model";
@@ -73,14 +73,24 @@ export class ToDoService {
 
     // FETCH REQUESTS - - - - - - - - - - - - - - - - - -
 
+    // We use a BehaviorSubject to cache the image received from the unsplash API.
+    private unsplashImageSubject$ = new BehaviorSubject<UnsplashData | null>(null);
+
     // getDashboardImg() uses the unsplash API to get a random picture for the dashboard's background image.
-    getDashboardImage(): Observable<UnsplashData> {
-      return this.http.get<UnsplashData & Record<string, unknown>>("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature").pipe(
-        map((response: UnsplashData & Record<string, unknown>) => ({
-          urls: { raw: response.urls.raw },
-          user: { name: response.user.name }
-        }))
-      );
+    getDashboardImage(): Observable<UnsplashData | null> {
+      if (!this.unsplashImageSubject$.value) {
+        return this.http.get<UnsplashData & Record<string, unknown>>("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature").pipe(
+          map((response: UnsplashData & Record<string, unknown>) => ({
+            urls: { raw: response.urls?.raw || '' },
+            user: { name: response.user?.name || '' }
+          })),
+          tap((imageData: UnsplashData) => {
+            this.unsplashImageSubject$.next(imageData); // .next() assigns a new value to an Observable of type BehaviorSubject and triggers the subscriptions.
+          }),
+        );
+      } else {
+        return this.unsplashImageSubject$.asObservable(); // we use asObservable() to protect the Observable of origin (which already holds the UnsplashData)
+      }
     }
 
     // getCryptoData() uses the coingecko API to get data (price, icon, 24h-high etc..) about a token.

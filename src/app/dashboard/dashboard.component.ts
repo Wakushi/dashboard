@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { interval, map, Observable, tap } from 'rxjs';
+import { interval, map, Observable, of, tap } from 'rxjs';
 import { CryptoData } from '../interfaces/cryptoData.interface';
 import { UnsplashData } from '../interfaces/unsplashData.interface';
 import { Todo } from '../models/todo.model';
@@ -23,7 +23,11 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
 
     // This handles the display of the dashboard's background image.
-    this.unsplashImage$ = this.todoService.getDashboardImage()
+    this.todoService.getDashboardImage().subscribe((imageData: UnsplashData | null) => {
+      if(imageData){
+        this.unsplashImage$ = of(imageData);
+      }
+    });
 
     // currentTime$ is an Observable that emits every second, and will update the current time accordingly.
     this.currentTime$ = interval(1000).pipe(

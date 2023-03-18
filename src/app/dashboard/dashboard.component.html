@@ -2,7 +2,7 @@
     *ngIf="unsplashImage$ | async as unsplashImage"
     [ngStyle]="{ 
         'background-image': unsplashImage ?
-        'url(' + unsplashImage.urls.raw + ')' :  ''  }" 
+        'url(' + unsplashImage.urls?.raw + ')' :  ''  }" 
     class="dashboard"
 >
 
@@ -21,7 +21,7 @@
 
     <div class="bottom">
 
-        <p *ngIf="unsplashImage" class="author"> {{ unsplashImage.user.name }} </p>
+        <p *ngIf="unsplashImage" class="author"> {{ unsplashImage.user?.name }} </p>
 
         <div 
             class="todo pinned-todo" 

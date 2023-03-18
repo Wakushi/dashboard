@@ -1,4 +1,4 @@
 export interface UnsplashData {
-    urls: { raw:string };
-    user: { name:string };
+    urls: { raw:string } | null;
+    user: { name:string } | null;
 }
