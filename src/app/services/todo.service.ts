@@ -6,6 +6,7 @@ import { CryptoData } from "../interfaces/cryptoData.interface";
 import { map } from "rxjs";
 import { WeatherData } from "../models/weatherData.model";
 import { OpenWeatherMapResponse } from "../interfaces/openWeatherMap.interface";
+import { UnsplashData } from "../interfaces/unsplashData.interface";
 
 // The decorator @Injectable allows this class to be used as a service.
 // providedIn:'root' means that its data will be accessible by all our components.
@@ -73,8 +74,13 @@ export class ToDoService {
     // FETCH REQUESTS - - - - - - - - - - - - - - - - - -
 
     // getDashboardImg() uses the unsplash API to get a random picture for the dashboard's background image.
-    getDashboardBgImg() : Observable<object> {
-        return this.http.get<object>("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature")
+    getDashboardImage(): Observable<UnsplashData> {
+      return this.http.get<UnsplashData & Record<string, unknown>>("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature").pipe(
+        map((response: UnsplashData & Record<string, unknown>) => ({
+          urls: { raw: response.urls.raw },
+          user: { name: response.user.name }
+        }))
+      );
     }
 
     // getCryptoData() uses the coingecko API to get data (price, icon, 24h-high etc..) about a token.
