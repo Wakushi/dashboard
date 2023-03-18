@@ -15,9 +15,8 @@ export class DashboardComponent implements OnInit {
 
   pinnedTodo!: Todo;
   currentTime$!:Observable<string>;
-  tokenInfo!: CryptoData;
-  weatherData$!: Observable<WeatherData>
-  unsplashImage$!: Observable<UnsplashData>
+  weatherData$!: Observable<WeatherData>;
+  unsplashImage$!: Observable<UnsplashData>;
 
   constructor(private todoService:ToDoService){};
 
@@ -32,14 +31,7 @@ export class DashboardComponent implements OnInit {
         return this.getCurrentTime();
       }),
     )
-
-    // getCryptoData() uses the coingecko API to get data (price, icon, 24h-high etc..) about a token.
-    this.todoService.getCryptoData().subscribe(
-      (data => {
-        this.tokenInfo = data;
-      })
-    )
-    
+ 
     // getWeather() uses the OWM API to gather data relative to the user's pos.
     this.weatherData$ = this.todoService.getWeather()
 

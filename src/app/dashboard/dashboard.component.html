@@ -7,7 +7,7 @@
 >
 
     <div class="top">
-        <app-token-info *ngIf="tokenInfo" [tokenInfo]="tokenInfo"></app-token-info>
+        <app-token-info></app-token-info>
 
         <div class="weather" *ngIf="weatherData$ | async as weatherData">
             <img [src]="weatherData.iconUrl" [alt]="weatherData.city" />

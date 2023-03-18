@@ -85,16 +85,16 @@ export class ToDoService {
 
     // getCryptoData() uses the coingecko API to get data (price, icon, 24h-high etc..) about a token.
     getCryptoData(): Observable<CryptoData> {
-        return this.http.get<any>('https://api.coingecko.com/api/v3/coins/ethereum').pipe(
-          map((data) => ({
-            tokenImg: { small: data.image.small },
-            tokenName: data.name,
-            marketData: {
-              currentPrice: { usd: data.market_data.current_price.usd },
-              high_24h: { usd: data.market_data.high_24h.usd },
-              low_24h: { usd: data.market_data.low_24h.usd },
-            },
-          })),
+        return this.http.get<CryptoData>('https://api.coingecko.com/api/v3/coins/ethereum').pipe(
+          map((data:CryptoData) => ({
+            name:data.name,
+            image: { small:data.image.small },
+            market_data: { 
+                current_price: { usd: data.market_data.current_price.usd }, 
+                high_24h: { usd: data.market_data.high_24h.usd }, 
+                low_24h: { usd: data.market_data.low_24h.usd } 
+            }
+          }))
         )
     }
 
