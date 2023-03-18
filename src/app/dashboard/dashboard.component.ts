@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { interval, map, Observable, tap } from 'rxjs';
 import { CryptoData } from '../interfaces/cryptoData.interface';
 import { Todo } from '../models/todo.model';
+import { WeatherData } from '../models/weatherData.model';
 import { ToDoService } from '../services/todo.service';
 
 @Component({
@@ -14,6 +15,7 @@ export class DashboardComponent implements OnInit {
   pinnedTodo!: Todo;
   currentTime$!:Observable<string>;
   tokenInfo!: CryptoData;
+  weatherData$!: Observable<WeatherData>
 
   // customedBgLoaded helps defining the dashboard's background-img and remove the loader svg  
   // when the data from unsplash API is received.
@@ -27,12 +29,6 @@ export class DashboardComponent implements OnInit {
       name:string
     }
   };
-
-  weatherObj = {
-    city:'',
-    temperature:null,
-    iconUrl:''
-  }
 
   constructor(private todoService:ToDoService){};
 
@@ -74,9 +70,7 @@ export class DashboardComponent implements OnInit {
     )
     
     // getWeather() uses the OWM API to gather data relative to the user's pos.
-    this.todoService.getWeather().subscribe(
-      ((data:any) => this.weatherObj = data)
-    )
+    this.weatherData$ = this.todoService.getWeather()
 
     // Initialize the pinnedTodo obj we display on the dashboard template with data from todoService.
     this.pinnedTodo = this.todoService.pinnedTodo[0] || null

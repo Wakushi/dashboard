@@ -4,6 +4,8 @@ import { HttpClient } from "@angular/common/http";
 import { Observable, switchMap } from "rxjs";
 import { CryptoData } from "../interfaces/cryptoData.interface";
 import { map } from "rxjs";
+import { WeatherData } from "../models/weatherData.model";
+import { OpenWeatherMapResponse } from "../interfaces/openWeatherMap.interface";
 
 // The decorator @Injectable allows this class to be used as a service.
 // providedIn:'root' means that its data will be accessible by all our components.
@@ -98,28 +100,28 @@ export class ToDoService {
     };
 
     // getWeather() uses the OWM API to gather data relative to the user's pos.
-    getWeather(): Observable<object> {
-        return new Observable(observer => {
-          navigator.geolocation.getCurrentPosition(position => {
-            this.ngZone.run(() => {
-              this.userPosition.lat = position.coords.latitude;
-              this.userPosition.long = position.coords.longitude;
-              observer.next();
-              observer.complete();
-            });
+    getWeather(): Observable<WeatherData> {
+      return new Observable(observer => {
+        navigator.geolocation.getCurrentPosition(position => {
+          this.ngZone.run(() => {
+            this.userPosition.lat = position.coords.latitude;
+            this.userPosition.long = position.coords.longitude;
+            observer.next();
+            observer.complete();
           });
-        }).pipe(
-          switchMap(() =>
-            this.http.get<object>(
-              `https://apis.scrimba.com/openweathermap/data/2.5/weather?lat=${this.userPosition.lat}&lon=${this.userPosition.long}&units=metric`
-            )
-          ),
-          map((data: any) => ({
-            iconUrl: `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`,
-            temperature: Math.round(data.main.temp),
-            city: data.name,
-          })),
-        );
+        });
+      }).pipe(
+        switchMap(() =>
+          this.http.get<OpenWeatherMapResponse>(
+            `https://apis.scrimba.com/openweathermap/data/2.5/weather?lat=${this.userPosition.lat}&lon=${this.userPosition.long}&units=metric`
+          )
+        ),
+        map((data: OpenWeatherMapResponse) => ({
+          iconUrl: `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`,
+          temperature: Math.round(data.main.temp),
+          city: data.name,
+        })),
+      )
     }
       
    

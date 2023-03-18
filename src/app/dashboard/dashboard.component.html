@@ -16,10 +16,10 @@
     <div class="top">
         <app-token-info *ngIf="tokenInfo" [tokenInfo]="tokenInfo"></app-token-info>
 
-        <div class="weather" *ngIf="weatherObj">
-            <img [src]="weatherObj.iconUrl" [alt]="weatherObj.city" />
-            <span class="weather-temp"> {{ weatherObj.temperature }} </span>
-            <span class="weather-city"> {{ weatherObj.city }} </span>
+        <div class="weather" *ngIf="weatherData$ | async as weatherData">
+            <img [src]="weatherData.iconUrl" [alt]="weatherData.city" />
+            <span class="weather-temp"> {{ weatherData.temperature }} </span>
+            <span class="weather-city"> {{ weatherData.city }} </span>
         </div>
 
     </div>
