@@ -13,6 +13,9 @@ export class TodoComponent {
   // We import the Todo Class and its methods to easily build Todo objects.
   @Input() todo!: Todo; 
 
+  isEdited: boolean = false
+  editTextAreaValue!:string 
+
   // We use the constructor to import our TodoService. 
   constructor(private todoService:ToDoService){}
 
@@ -26,5 +29,14 @@ export class TodoComponent {
   handlePinnedTodo() : void {
     this.todoService.pinTodo(this.todo)
   }
+
+  toggleEditing() : void {
+    if(!this.isEdited){
+      this.editTextAreaValue = this.todo.description
+    } else {
+      this.todo.description = this.editTextAreaValue
+    }
+    this.isEdited = !this.isEdited
+  } 
 
 }

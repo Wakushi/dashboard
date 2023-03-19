@@ -7,7 +7,11 @@
         display : todo.isDeleted ? 'none' : 'flex' } "
 >   
     <div class="todo-icons-edit-pin">
-        <i class="fa-solid fa-pen-to-square"></i>
+        <i  
+            [ngStyle]="{ color : isEdited ? 'red' : '' }"
+            (click)="toggleEditing()"
+            class="fa-solid fa-pen-to-square"
+        ></i>
         <i 
             [ngStyle]="{ color : todo.isPinned ? 'gold' : '#fff' }"
             (click)="handlePinnedTodo()" 
@@ -33,9 +37,20 @@
     </div>
 
     <h2 class="todo-title">{{ todo.title }}</h2>
+
     <span class="todo-date">
         <i class="fa-regular fa-calendar-check"></i>
         {{ todo.createdDate | date:'mediumDate' }}
     </span>
-    <p class="todo-desc"> {{ todo.description }}</p>
+
+    <p *ngIf="!isEdited" class="todo-desc"> {{ todo.description }}</p>
+
+    <textarea 
+        *ngIf="isEdited" 
+        [value]="todo.description" 
+        class="todo-edit"
+        rows="5"
+        [(ngModel)]="editTextAreaValue"
+    ></textarea>
+
 </div>
