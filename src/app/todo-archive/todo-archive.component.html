@@ -1,6 +1,18 @@
 <div class="todo-archives">
-    <button (click)="emptyArchives()" class="btn delete-btn">Empty archive</button>
+    <button (click)="toggleConfirmModal()" class="btn delete-btn">Empty archive</button>
+    <span class="todo-archives-empty" *ngIf="archivedTodos.length === 0">Archives are currently empty</span>
     <div class="todo-container">
         <app-todo *ngFor="let todo of archivedTodos" [todo]="todo"></app-todo>
+    </div>
+    <div class="modal-container">
+        <div 
+            [ngClass]="{ 'display-clean-modal' : !isModalDisplayed  }"
+            class="gallery-clean-modal display-clean-modal">
+            <p>Are you sure ?</p>
+            <span>
+                <button (click)="emptyArchives()" class="btn confirm-btn">Yes</button>
+                <button (click)="toggleConfirmModal()" class="btn confirm-btn">No</button>
+            </span>
+        </div>
     </div>
 </div>

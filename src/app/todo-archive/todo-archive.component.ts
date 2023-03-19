@@ -10,8 +10,9 @@ import { ToDoService } from '../services/todo.service';
 })
 export class TodoArchiveComponent implements OnInit {
 
-  archivedTodos: Todo[] = []
   private subscription!: Subscription
+  archivedTodos: Todo[] = []
+  isModalDisplayed:boolean = false
 
   constructor(private todoService:ToDoService){}
 
@@ -21,8 +22,13 @@ export class TodoArchiveComponent implements OnInit {
     )
   }
 
+  toggleConfirmModal():void {
+    this.isModalDisplayed = !this.isModalDisplayed
+  }
+
   emptyArchives():void{
     this.todoService.emptyArchives()
+    this.toggleConfirmModal()
   }
 
   ngOnDestroy(): void {

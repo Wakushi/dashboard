@@ -1,5 +1,7 @@
 .todo-archives {
-    padding: 5em 1em 1em 1em;
+    padding: 6em 1em 1em 1em;
+    position: relative;
+    overflow-x: hidden;
 }
 
 .todo-container {
@@ -7,6 +9,15 @@
     justify-content: center;
     flex-wrap: wrap;
     padding-top: 5em;
+}
+
+.todo-archives-empty {
+    display: block;
+    font-size: 1.5rem;
+    text-align: center;
+    position: relative;
+    top: 70px;
+    opacity: 0.6;
 }
 
 .delete-btn {
@@ -17,3 +28,55 @@
         background-color: rgb(207, 0, 0);
     }
 }
+
+.confirm-btn {
+    background-color: #111;
+    &:hover,
+    &:focus {
+        background-color: rgb(255, 255, 255);
+        color: #111;
+    }
+}
+
+.gallery-clean-modal {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    color: #fff;
+    text-shadow: 1px 1px 2px #111;
+    background-color: #000000;
+    background-image: url(./assets/color-bg.png);
+    animation: bg-pan-right 50s infinite both;
+    background-size: cover;
+    top: 140px;
+    left: -10px;
+    padding: 5px 20px;
+    box-shadow: 2px 2px 5px rgba(117, 117, 117, 0.808);
+    border-radius: 0 20px 20px 0;
+    transition: 0.6s;
+
+    span {
+        display: flex;
+        gap: 10px;
+    }
+  }
+    
+  .display-clean-modal {
+    transform: translateX(-100%);
+  }
+
+
+  @keyframes bg-pan-right {
+    0% {
+      background-position: 0% 0%;
+    }
+    50% {
+      background-position: 100% 100%;
+    }
+    100% {
+      background-position: 0% 0%;
+    }
+  }
