@@ -28,8 +28,8 @@
             *ngIf="pinnedTodo"
             [ngStyle]=" { 
                 backgroundColor: pinnedTodo.type === 'Work' ?
-                '#BF211E' : pinnedTodo.type === 'Study' ?
-                '#2EBFA5' : '#FED766', 
+                '#1E88E5' : pinnedTodo.type === 'Study' ?
+                '#43A047' : '#FF9800', 
                 display : pinnedTodo.isDeleted || !pinnedTodo.isPinned  ? 'none' : 'flex' } "
         >
 

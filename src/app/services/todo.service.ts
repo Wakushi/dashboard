@@ -17,19 +17,29 @@ import { UnsplashData } from "../interfaces/unsplashData.interface";
 export class ToDoService {
 
     // We import the httpClient which unlocks the get() methods to fetch data from APIs.
-    constructor(private http:HttpClient, private ngZone:NgZone){}
+    constructor(private http:HttpClient, private ngZone:NgZone){};
 
     // todos simulates the data from all the user's Todos.
     todos: Todo[] = [
-        new Todo(1, "Learn", "Read : 'Learn Angular in 7 days'", new Date(), "Study", false, false, false),
-        new Todo(2, "Cooking", "Buy vegetables for tomorrow's soup", new Date(), "Other", false, false, false),
-        new Todo(3, "Call Simon", "06.XX.XX.XX.XX", new Date(), "Work", false, false, false)
+        new Todo(1, "Learn", "Read : 'Learn Angular in 7 days'", new Date(), "Study", false, false, false,false),
+        new Todo(2, "Cooking", "Buy vegetables for tomorrow's soup", new Date(), "Other", false, false, false,false),
+        new Todo(3, "Call Simon", "06.XX.XX.XX.XX", new Date(), "Work", false, false, false,false)
       ];
 
     // pinnedTodo holds the Todo that the user pinned to his dashboard.  
     pinnedTodo:Todo[] = [
     
-    ]
+    ];
+
+    // archivedTodo holds the archived Todos
+    private _archivedTodos = new BehaviorSubject<Todo[]>([]);
+    archivedTodos$ = this._archivedTodos.asObservable();
+
+    //getTodoByID returns the todo that matches the id passed as its parameter.
+    getTodoById(id:number) : Todo {
+      const targetTodo = this.todos.filter(todo => todo.id === id)[0]
+      return targetTodo
+    }
 
     // addTodo() generates a new Todo using the user inputs from NewTodoFormComponent and adds it to the todos[].
     // [No back-end] : This would use a POST request to send the new Todo to a server.
@@ -42,10 +52,24 @@ export class ToDoService {
           todo.type,
           false,
           false,
+          false,
           false
         );
         this.todos.unshift(newTodo);
-      }
+    }
+
+    // addArchivedTodo unshifts a todo to the archived array stored in a BehaviorSubject.
+    addArchivedTodo(id:number):void {
+      const archivedTodo: Todo = {
+        ...this.getTodoById(id),
+        toggleIconDisplay(){},
+        isDeleted:false,
+        isArchived:true
+      };
+      const currentArchives = this._archivedTodos.getValue();
+      const updatedArchives =  [archivedTodo, ...currentArchives];
+      this._archivedTodos.next(updatedArchives);
+    }
     
     // deleteTodo() removes a todo from the todos[]
     // [No back-end] : This would use a DELETE request to delete the new Todo to a server (using its id)
@@ -53,10 +77,11 @@ export class ToDoService {
       this.todos.forEach(todo => {
         if(todo.id === id){
           todo.isDeleted = true
-        }
-      })
-      this.todos = this.todos.filter(todo => todo.id !== id)
-    }
+        };
+      });
+      this.addArchivedTodo(id) 
+      this.todos = this.todos.filter(todo => todo.id !== id);
+    };
 
     // pinTodo() handles the adding and removal of todos as pinnedTodo
     pinTodo(todo:Todo) : void {
@@ -69,6 +94,11 @@ export class ToDoService {
           todo.isPinned = true
           this.pinnedTodo.push(todo)
         }  
+    }
+
+    // emptyArchives resets the archives array.
+    emptyArchives():void {
+      this._archivedTodos.next([])
     }
 
     // FETCH REQUESTS - - - - - - - - - - - - - - - - - -

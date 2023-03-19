@@ -1,1 +1,6 @@
-<p>todo-archive works!</p>
+<div class="todo-archives">
+    <button (click)="emptyArchives()" class="btn delete-btn">Empty archive</button>
+    <div class="todo-container">
+        <app-todo *ngFor="let todo of archivedTodos" [todo]="todo"></app-todo>
+    </div>
+</div>

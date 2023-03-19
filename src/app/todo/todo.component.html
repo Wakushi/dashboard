@@ -2,11 +2,11 @@
     class="todo" 
     [ngStyle]=" { 
         backgroundColor: todo.type === 'Work' ?
-        '#BF211E' : todo.type === 'Study' ? 
-        '#2EBFA5' : '#FED766', 
+        '#1E88E5' : todo.type === 'Study' ? 
+        '#43A047' : '#FF9800', 
         display : todo.isDeleted ? 'none' : 'flex' } "
 >   
-    <div class="todo-icons-edit-pin">
+    <div *ngIf="!todo.isArchived" class="todo-icons-edit-pin">
         <i  
             [ngStyle]="{ color : isEdited ? 'red' : '' }"
             (click)="toggleEditing()"
@@ -19,7 +19,7 @@
         ></i>
     </div>
 
-    <div class="todo-icons-delete">
+    <div *ngIf="!todo.isArchived" class="todo-icons-delete">
         <i 
             (click)="todo.toggleIconDisplay()" 
             class="fa-regular fa-calendar-xmark"

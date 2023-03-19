@@ -8,7 +8,8 @@ export class Todo {
           public type: string,
           public areIconDisplayed: boolean,
           public isPinned:boolean,
-          public isDeleted:boolean
+          public isDeleted:boolean,
+          public isArchived:boolean
         ) {}
       
         // toggles the display of the delete confirmation icons of a Todo.
