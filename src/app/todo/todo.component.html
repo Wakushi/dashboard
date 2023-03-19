@@ -6,13 +6,16 @@
         '#2EBFA5' : '#FED766', 
         display : todo.isDeleted ? 'none' : 'flex' } "
 >   
-    <i 
-        [ngStyle]="{ color : todo.isPinned ? 'gold' : '#fff' }"
-        (click)="handlePinnedTodo()" 
-        class="fa-solid fa-thumbtack"
-    ></i>
+    <div class="todo-icons-edit-pin">
+        <i class="fa-solid fa-pen-to-square"></i>
+        <i 
+            [ngStyle]="{ color : todo.isPinned ? 'gold' : '#fff' }"
+            (click)="handlePinnedTodo()" 
+            class="fa-solid fa-thumbtack"
+        ></i>
+    </div>
 
-    <div class="todo-icons">
+    <div class="todo-icons-delete">
         <i 
             (click)="todo.toggleIconDisplay()" 
             class="fa-regular fa-calendar-xmark"

@@ -32,13 +32,17 @@
                 '#2EBFA5' : '#FED766', 
                 display : pinnedTodo.isDeleted || !pinnedTodo.isPinned  ? 'none' : 'flex' } "
         >
-            <i  
-                (click)="handlePinnedTodo()"
-                [ngStyle]="{ color : pinnedTodo.isPinned ? 'gold' : '#fff' }"
-                class="fa-solid fa-thumbtack"
-            ></i>
 
-            <div class="todo-icons">
+            <div class="todo-icons-edit-pin">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <i 
+                    [ngStyle]="{ color : pinnedTodo.isPinned ? 'gold' : '#fff' }"
+                    (click)="handlePinnedTodo()" 
+                    class="fa-solid fa-thumbtack"
+                ></i>
+            </div>
+
+            <div class="todo-icons-delete">
                 <i 
                     (click)="pinnedTodo.toggleIconDisplay()" 
                     class="fa-regular fa-calendar-xmark"
