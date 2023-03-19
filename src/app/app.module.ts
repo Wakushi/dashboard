@@ -11,6 +11,7 @@ import { NewTodoFormComponent } from './new-todo-form/new-todo-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { TokenInfoComponent } from './token-info/token-info.component';
+import { TodoArchiveComponent } from './todo-archive/todo-archive.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { TokenInfoComponent } from './token-info/token-info.component';
     TodoComponent,
     TodoListComponent,
     NewTodoFormComponent,
-    TokenInfoComponent
+    TokenInfoComponent,
+    TodoArchiveComponent
   ],
   imports: [
     BrowserModule,
