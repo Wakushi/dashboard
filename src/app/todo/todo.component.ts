@@ -22,7 +22,6 @@ export class TodoComponent {
   // deleteTodo() removes the selected Todo from data (todo.service.ts).
   deleteTodo() : void {
     this.todoService.deleteTodo(this.todo.id)
-    this.todo.isDeleted = true
   }
 
   // handlePinnedTodo() handles the adding and removal of todos as pinnedTodo 
