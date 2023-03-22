@@ -35,7 +35,7 @@ export class NewTodoFormComponent implements OnInit {
     // We use an Observable that emits Todo objects using valueChanges which detects input changes
     // and updates a Todo preview dynamically. 
     this.todoPreview$ = this.todoForm.valueChanges
-    
+
   }
   
   // onSubmitTodo() uses our addTodo() methods by passing it the form's value as its parameter.

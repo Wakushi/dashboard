@@ -25,7 +25,7 @@ export class DashboardComponent implements OnInit {
     // This handles the display of the dashboard's background image.
     this.todoService.getDashboardImage().subscribe((imageData: UnsplashData | null) => {
       if(imageData){
-        this.unsplashImage$ = of(imageData);
+        this.unsplashImage$ = of(imageData); // of() creates an Observable that emits immediately the value passed as its argument.
       }
     });
 
