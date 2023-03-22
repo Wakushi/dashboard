@@ -25,7 +25,7 @@ export class NewTodoFormComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // We setup our reactif form to connect it to our template using [formGroup] and formControlName.
+    // We setup our reactive form to connect it to our template using [formGroup] and formControlName.
     this.todoForm = this.formBuilder.group({
       title: [null],
       description: [null],
@@ -34,13 +34,8 @@ export class NewTodoFormComponent implements OnInit {
 
     // We use an Observable that emits Todo objects using valueChanges which detects input changes
     // and updates a Todo preview dynamically. 
-    this.todoPreview$ = this.todoForm.valueChanges.pipe(
-      map(formValue => ({
-        ...formValue,
-        createdDate: new Date(),
-        id:0
-      }))
-    )
+    this.todoPreview$ = this.todoForm.valueChanges
+    
   }
   
   // onSubmitTodo() uses our addTodo() methods by passing it the form's value as its parameter.
